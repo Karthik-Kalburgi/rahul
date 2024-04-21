@@ -1,0 +1,47 @@
+karthik@karthik-Lenovo-IdeaPad-S540-15IWL-D:~$ sudo apt-get update
+karthik@karthik-Lenovo-IdeaPad-S540-15IWL-D:~$ sudo apt-get install dnsmasq 
+karthik@karthik-Lenovo-IdeaPad-S540-15IWL-D:~$ sudo apt-get install dnsutils
+karthik@karthik-Lenovo-IdeaPad-S540-15IWL-D:~$ sudo systemctl status dnsmasq
+karthik@karthik-Lenovo-IdeaPad-S540-15IWL-D:~$ sudo ifconfig
+karthik@karthik-Lenovo-IdeaPad-S540-15IWL-D:~$ sudo systemctl stop NetworkManager
+karthik@karthik-Lenovo-IdeaPad-S540-15IWL-D:~$ sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
+karthik@karthik-Lenovo-IdeaPad-S540-15IWL-D:~$ sudo nano /etc/dnsmasq.conf
+port = 53 
+domain-needed
+bogus-priv
+strict-order
+
+expand-hosts
+domain=katya.in
+
+karthik@karthik-Lenovo-IdeaPad-S540-15IWL-D:~$ sudo nano /etc/hosts
+
+127.0.0.1	localhost
+127.0.1.1	karthik-Lenovo-IdeaPad-S540-15IWL-D
+124.250.33.69 katya.in
+142.250.33.78 cn.manual.katya.in
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+karthik@karthik-Lenovo-IdeaPad-S540-15IWL-D:~$ sudo systemctl restart dnsmasq
+#ERROR
+karthik@karthik-Lenovo-IdeaPad-S540-15IWL-D:~$ sudo lsof -i:53
+karthik@karthik-Lenovo-IdeaPad-S540-15IWL-D:~$ sudo systemctl stop systemd-resolved
+karthik@karthik-Lenovo-IdeaPad-S540-15IWL-D:~$ sudo lsof -i:53
+karthik@karthik-Lenovo-IdeaPad-S540-15IWL-D:~$ sudo systemctl start dnsmasq
+karthik@karthik-Lenovo-IdeaPad-S540-15IWL-D:~$ sudo systemctl status dnsmasq
+karthik@karthik-Lenovo-IdeaPad-S540-15IWL-D:~$ dig a katya.in @localhost
+
+
+
+
+
+
+to Reconfigure DNS server
+sudo systemctl start systemd-resolved
+sudo systemctl start NetworkManager
+if not able to access internet RESTART your PC
